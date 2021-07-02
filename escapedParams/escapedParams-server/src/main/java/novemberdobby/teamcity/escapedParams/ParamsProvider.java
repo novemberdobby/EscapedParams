@@ -32,9 +32,14 @@ public class ParamsProvider
         HashMap<String, String> params = new HashMap<>();
 
         ParametersProvider buildParams = build.getParametersProvider();
+        String languageName = "POWERSHELL";
 
-        //TODO proper storage
-        //TODO constant prefix marker
+        /*TODO add note that surrounding quotes will be added automatically,
+               and that any quotes in the parameter will be escaped
+         */
+        //TODO 'preview' on feature jsp for arbitrary text
+        //TODO proper storage (& don't allow escaping already-escaped params)
+
         for(String paramName : Collections.singleton("message")) {
 
             String value = "";
@@ -42,7 +47,7 @@ public class ParamsProvider
                 value = buildParams.get(paramName);
             }
 
-            params.put(String.format("ESCAPED_POWERSHELL_%s", paramName), value);
+            params.put(String.format("%s_%s_%s", Constants.ESCAPED_PARAM_PREFIX, languageName, paramName), value);
         }
 
         return params;
