@@ -4,7 +4,7 @@
     <name>escapedParams</name>
     <display-name>Escaped Parameters</display-name>
     <version>0.1</version>
-    <description>Provide parameters in an escaped format suitable for embedding into strings in various scripting languages</description>
+    <description>Provide parameters in an escaped format suitable for embedding in various scripting languages</description>
     <download-url>-</download-url>
     <email>novemberdobby@gmail.com</email>
     <vendor>
