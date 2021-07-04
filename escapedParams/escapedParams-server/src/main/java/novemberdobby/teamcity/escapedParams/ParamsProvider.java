@@ -32,22 +32,28 @@ public class ParamsProvider
         HashMap<String, String> params = new HashMap<>();
 
         ParametersProvider buildParams = build.getParametersProvider();
-        String languageName = "POWERSHELL";
 
         /*TODO add note that surrounding quotes will be added automatically,
                and that any quotes in the parameter will be escaped
          */
+        //TODO do we need to hook any config updated events? if a param name is changed
         //TODO 'preview' on feature jsp for arbitrary text
         //TODO proper storage (& don't allow escaping already-escaped params)
 
-        for(String paramName : Collections.singleton("message")) {
+        for(EscaperType lang : EscaperType.values()) {
+            for (String paramName : Collections.singleton("message")) {
 
-            String value = "";
-            if(!onlyKeys) {
-                value = buildParams.get(paramName);
+                String value = "";
+                if (!onlyKeys) {
+                    //get the raw value from the build
+                    value = buildParams.get(paramName);
+
+                    //escape before sending it on
+                    value = lang.getEscaper().escape(value);
+                }
+
+                params.put(String.format("%s_%s_%s", Constants.ESCAPED_PARAM_PREFIX, lang.getPrefix(), paramName), value);
             }
-
-            params.put(String.format("%s_%s_%s", Constants.ESCAPED_PARAM_PREFIX, languageName, paramName), value);
         }
 
         return params;
