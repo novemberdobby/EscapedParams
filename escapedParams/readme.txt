@@ -1,1 +1,1 @@
-todo
+![secret_ingredient_is_base64](/images/how.png)
