@@ -5,8 +5,8 @@ import org.jetbrains.annotations.NotNull;
 interface BaseParamEscaper {
 
     /**
-     * @param input raw parameter string with arbitrary text
+     * @param base64Input parameter string pre-escaped into base64
      * @return language-specific function to decode a base64 string into a variable
      */
-    String escape(@NotNull String input);
+    String getDecodeScript(@NotNull String base64Input);
 }

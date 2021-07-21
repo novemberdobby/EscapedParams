@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Base64;
 
 public class ParamsProvider
         extends AbstractBuildParametersProvider
@@ -40,16 +41,26 @@ public class ParamsProvider
         //TODO 'preview' on feature jsp for arbitrary text
         //TODO proper storage (& don't allow escaping already-escaped params)
 
-        for(EscaperType lang : EscaperType.values()) {
-            for (String paramName : Collections.singleton("message")) {
+        for (String paramName : Collections.singleton("message")) {
+            String value = "";
+            if (!onlyKeys) {
+                //get the raw value from the build
+                value = buildParams.get(paramName);
 
-                String value = "";
-                if (!onlyKeys) {
-                    //get the raw value from the build
-                    value = buildParams.get(paramName);
+                if(value == null) {
+                    //TODO log
+                    continue;
+                }
 
-                    //escape before sending it on
-                    value = lang.getEscaper().escape(value);
+                //escape before sending it on
+                value = Base64.getEncoder().encodeToString(value.getBytes());
+            }
+
+            params.put(String.format("%s_%s", Constants.ESCAPED_PARAM_PREFIX, paramName), value);
+
+            for (EscaperType lang : EscaperType.values()) {
+                if(!onlyKeys) {
+                    value = lang.getEscaper().getDecodeScript(value);
                 }
 
                 params.put(String.format("%s_%s_%s", Constants.ESCAPED_PARAM_PREFIX, lang.getPrefix(), paramName), value);

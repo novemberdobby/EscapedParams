@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 public enum EscaperType {
     PowerShell("PowerShell", "POWERSHELL", PowershellEscaperImpl.class),
     CSharp("C#", "CSHARP", CSharpEscaperImpl.class),
+    Python("Python", "PYTHON", PythonEscaperImpl.class),
     ;
 
     private final String m_description;
