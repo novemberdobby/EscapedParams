@@ -2,7 +2,7 @@ package novemberdobby.teamcity.escapedParams;
 
 import org.jetbrains.annotations.NotNull;
 
-interface BaseParamEscaper {
+public interface BaseParamEscaper {
 
     /**
      * @param base64Input parameter string pre-escaped into base64

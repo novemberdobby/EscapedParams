@@ -2,6 +2,7 @@ package novemberdobby.teamcity.escapedParams;
 
 import jetbrains.buildServer.log.Loggers;
 import java.lang.reflect.Constructor;
+import novemberdobby.teamcity.escapedParams.impl.*;
 
 public enum EscaperType {
     PowerShell("PowerShell", "POWERSHELL", PowershellEscaperImpl.class),

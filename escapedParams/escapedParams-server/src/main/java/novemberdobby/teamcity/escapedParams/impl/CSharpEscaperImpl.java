@@ -1,5 +1,6 @@
-package novemberdobby.teamcity.escapedParams;
+package novemberdobby.teamcity.escapedParams.impl;
 
+import novemberdobby.teamcity.escapedParams.BaseParamEscaper;
 import org.jetbrains.annotations.NotNull;
 
 public class CSharpEscaperImpl implements BaseParamEscaper {
